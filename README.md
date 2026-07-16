@@ -246,9 +246,12 @@ MIT License.
 
 **Muhammad Khubaib Ahmad**  
 
-📧 [khubaib0.1ai@gmail.com](mailto:khubaib0.1ai@gmail.com)  
+📧 [khubaib0.1ai@gmail.com](mailto:khubaib.ahmad@inference-lab.org)  
+
 🌐 [GitHub: Khubaib8281](https://github.com/Khubaib8281)
+
 🐍 [PYPI: Khubaib_01](https://pypi.org/project/faker-pk)
+
 > **LinkedIn:** https://www.linkedin.com/in/muhammad-khubaib-ahmad-
 
 ---
