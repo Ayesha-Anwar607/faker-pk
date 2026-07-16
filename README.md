@@ -246,7 +246,7 @@ MIT License.
 
 **Muhammad Khubaib Ahmad**  
 
-📧 [khubaib0.1ai@gmail.com](mailto:khubaib.ahmad@inference-lab.org)  
+📧 [khubaib.ahmad@inference-lab.org](mailto:khubaib.ahmad@inference-lab.org)  
 
 🌐 [GitHub: Khubaib8281](https://github.com/Khubaib8281)
 
