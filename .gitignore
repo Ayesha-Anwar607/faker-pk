@@ -8,6 +8,6 @@ dist/
 build/
 
 venv/
-.env/
+.env
 
 .vscode/

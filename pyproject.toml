@@ -10,7 +10,7 @@ readme = "README.md"
 authors = [{ name = "Muhammad Khubaib Ahmad", email = "khubaib0.1ai@gmail.com" }]
 license = { text = "MIT" }   
 requires-python = ">=3.8"
-dependencies = []
+dependencies = ["faker"]
 keywords = ["faker", "pakistan", "data", "mock", "testing"]
 classifiers = [
     "Programming Language :: Python :: 3",  

@@ -70,15 +70,17 @@ class FakerPK:
     # --------------------
     # Job Info
     # --------------------
-    def job_title(self, count=1):
-        return self._generate_multiple(job_title, count)
-
+    def job_title(self, count=1, industry=None):
+        if count == 1:
+            return job_title(industry=industry)
+        return [job_title(industry=industry) for _ in range(count)]
+    
     def job_title_with_industry(self, count=1):
         return self._generate_multiple(job_title_with_industry, count)
-    
+
     def salary(self, count=1, industry=None):
         """Generate random salary from company.py."""
-        return self._generate_multiple(salary, count)     
-
-
+        if count == 1:
+            return salary(industry=industry)
+        return [salary(industry=industry) for _ in range(count)]
 __all__ = ["FakerPK", "FakerPKProvider"]
