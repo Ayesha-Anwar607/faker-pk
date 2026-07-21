@@ -7,6 +7,15 @@ It also provides full support as a Faker provider so you can integrate it direct
 It’s designed for developers who want **realistic-looking Pakistani data** in their applications or ML datasets.
 
 ---
+## Authors
+
+- **Muhammad Khubaib Ahmad** - Original author and creator of faker-pk
+- **INFERENCE Lab** - Organization behind the ongoing development of faker-pk
+
+## Maintainers
+
+- **Ayesha Anwar** - Lead developer of faker-pk v2.0
+- **INFERENCE Lab** - Project organization and maintainer
 
 ## Why Use faker-pk?
 

@@ -7,4 +7,3 @@ def test_provider_registration():
     
     assert isinstance(fake.pk_male_name(), str)
     assert isinstance(fake.pk_city(), str)
-            
