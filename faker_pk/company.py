@@ -31,12 +31,18 @@ def company_name():
 
 
 # Industries
-INDUSTRIES = [
-    "Information Technology", "Finance", "Healthcare", "Education",
-    "Marketing & Media", "Government / Public Sector", "Engineering / Manufacturing",
-    "Hospitality / Retail", "Entrepreneur / Startup", "Legal / Consulting"
-]
-
+INDUSTRIES = {
+    "Information Technology": "IT",
+    "Finance": "Finance",
+    "Healthcare": "Healthcare",
+    "Education": "Education",
+    "Marketing & Media": "Marketing",
+    "Government / Public Sector": "Government",
+    "Engineering / Manufacturing": "Engineering",
+    "Hospitality / Retail": "Retail",
+    "Entrepreneur / Startup": "Entrepreneur",
+    "Legal / Consulting": "Consulting"
+}
 # Job titles mapped to industries
 
 JOB_TITLE_MAPPING = {
@@ -91,28 +97,24 @@ JOB_TITLE_MAPPING = {
 # Functions
 
 def job_title(industry=None):
-    """
-    Return a random job title. If industry is specified, choose from that industry.
-    """
     if industry:
-        if industry not in JOB_TITLE_MAPPING:
+        # Map human-readable input to internal keys (e.g. "Information Technology" -> "IT")
+        normalized = INDUSTRIES.get(industry, industry)
+        if normalized not in JOB_TITLE_MAPPING:
             raise ValueError(f"Industry '{industry}' not found.")
-        return random.choice(JOB_TITLE_MAPPING[industry])
+
+        return random.choice(JOB_TITLE_MAPPING[normalized])
     # Randomly pick an industry first
     selected_industry = random.choice(list(JOB_TITLE_MAPPING.keys()))
     return random.choice(JOB_TITLE_MAPPING[selected_industry])
 
-
 def job_title_with_industry():
-    """
-    Return a tuple of (job_title, industry) for consistency.
-    """
     selected_industry = random.choice(list(JOB_TITLE_MAPPING.keys()))
     title = random.choice(JOB_TITLE_MAPPING[selected_industry])
-    return title, selected_industry
+    return f"{title} - {selected_industry}"
 
 def industry_name():
-    return random.choice(INDUSTRIES)
+    return random.choice(list(INDUSTRIES.keys()))
 
 def salary(industry=None):
     """
@@ -125,16 +127,18 @@ def salary(industry=None):
         "Healthcare": (30000, 180000),
         "Education": (25000, 120000),   
         "Marketing": (30000, 150000),   
-        "Govt": (25000, 120000),
+        "Government": (25000, 120000),
         "Engineering": (35000, 180000),
         "Retail": (20000, 100000),
         "Entrepreneur": (50000, 300000),
         "Consulting": (40000, 200000)
     }  
-
-    if industry and industry in ranges:
-        low, high = ranges[industry]
+    if industry:
+        normalized = INDUSTRIES.get(industry, industry)
+        if normalized in ranges:
+            low, high = ranges[normalized]
+        else:
+            low, high = random.choice(list(ranges.values()))
     else:
         low, high = random.choice(list(ranges.values()))
-
-    return random.randint(low, high)        
+    return random.randint(low, high)
