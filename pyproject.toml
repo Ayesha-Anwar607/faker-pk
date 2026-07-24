@@ -24,6 +24,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]    
-
+[tool.setuptools.package-data]
+faker_pk = ["*.db"]
 [project.urls]   
 "Homepage" = "https://github.com/Khubaib8281/faker-pk"   
