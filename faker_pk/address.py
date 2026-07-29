@@ -1,52 +1,44 @@
-import random    
-
-# Mapping of provinces to their major cities/towns      
-PROVINCE_CITIES = {
-    "Punjab": [
-        "Lahore", "Faisalabad", "Rawalpindi", "Multan", "Gujranwala",
-        "Sialkot", "Bahawalpur", "Sargodha", "Sahiwal", "Dera Ghazi Khan"
-    ],
-    "Sindh": [
-        "Karachi", "Hyderabad", "Sukkur", "Larkana", "Mirpur Khas",
-        "Nawabshah", "Shikarpur", "Khairpur", "Jacobabad", "Thatta"
-    ],
-    "Khyber Pakhtunkhwa": [  
-        "Peshawar", "Mardan", "Abbottabad", "Swat", "Charsadda",
-        "Bannu", "Kohat", "Dera Ismail Khan", "Haripur", "Mansehra"
-    ],  
-    "Balochistan": [
-        "Quetta", "Gwadar", "Sibi", "Khuzdar", "Turbat",
-        "Chaman", "Zhob", "Bela", "Makran", "Pasni"
-    ],
-    "Gilgit Baltistan": [
-        "Gilgit", "Skardu", "Hunza", "Ghizer", "Diamer",
-        "Astore", "Shigar", "Kharmang"
-    ],
-    "Islamabad Capital Territory": ["Islamabad"]
-}
+import random
+from .utils import query_value, query_row
 
 
-def city_and_province():
-    """Return a tuple of (city, province) based on accurate mapping."""
-    province_name = random.choice(list(PROVINCE_CITIES.keys()))
-    city_name = random.choice(PROVINCE_CITIES[province_name])
-    return city_name, province_name
+def city(province=None):
+    """Return a random Pakistani city. Optionally filter by province."""
+    if province:
+        return query_value(
+            "SELECT city FROM locations WHERE province = ? ORDER BY RANDOM() LIMIT 1",
+            (province,)
+        )
+    return query_value("SELECT city FROM locations ORDER BY RANDOM() LIMIT 1")
 
 
-def city():
-    """Return a random Pakistani city."""
-    return city_and_province()[0]
+def province(city=None):
+    """Return a random province. If city is given, return its matching province."""
+    if city:
+        return query_value(
+            "SELECT province FROM locations WHERE city = ? LIMIT 1", (city,)
+        )
+    return query_value("SELECT province FROM locations ORDER BY RANDOM() LIMIT 1")
 
 
-def province():
-    """Return the province corresponding to the random city."""
-    return city_and_province()[1]
+def full_address(city=None, province=None):
+    """Generate a realistic full Pakistani address with real postal code."""
+    if city:
+        row = query_row(
+            "SELECT city, province, postal_code FROM locations WHERE city = ? LIMIT 1",
+            (city,)
+        )
+    elif province:
+        row = query_row(
+            "SELECT city, province, postal_code FROM locations WHERE province = ? ORDER BY RANDOM() LIMIT 1",
+            (province,)
+        )
+    else:
+        row = query_row(
+            "SELECT city, province, postal_code FROM locations ORDER BY RANDOM() LIMIT 1"
+        )
 
-
-def full_address():
-    """Generate a realistic full Pakistani address."""
+    city_name, province_name, postal_code = row
     house_no = f"House No. {random.randint(1, 999)}"
     street = f"Street No. {random.randint(1, 30)}"
-    city_name, province_name = city_and_province()
-    postal_code = random.randint(10000, 99999)
     return f"{house_no}, {street}, {city_name}, {province_name}, {postal_code}"

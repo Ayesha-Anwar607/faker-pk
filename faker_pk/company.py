@@ -1,144 +1,89 @@
-import random   
+import random
+from .utils import query_value, query_row
 
-COMPANIES = [
-    "Tech Solutions", "Global Enterprises", "NexGen Software", "Bright Future Ltd",
-    "Innovatech", "Pak Logistics", "Star Industries", "FutureTech Labs", "NextEra Solutions",
-    "Digital Horizons", "GreenField Enterprises", "Alpha Systems", "Skyline Technologies",
-    "Visionary Solutions", "Prime Consulting", "BlueWave Software", "Omega Solutions",
-    "Sunrise Industries", "Quantum Tech", "Everest Solutions", "Peak Dynamics",
-    "Galaxy Enterprises", "Crescent Innovations", "Summit Tech", "Aurora Systems",
-    "Infinity Solutions", "Pioneer Technologies", "Vertex Labs", "NextGen Analytics",
-    "Momentum Solutions", "Nova Systems", "Titan Tech", "Elite Software", "GlobalTech",
-    "Fusion Enterprises", "Legacy Solutions", "Vortex Innovations", "Ascend Tech",
-    "CoreLogic", "Hyperion Labs", "Luminous Software", "EverTech", "Matrix Solutions",
-    "Sapphire Systems", "Digital Minds", "Vertex Solutions", "Zenith Tech", "Precision Labs",
-    "Altair Enterprises", "Phoenix Systems"
-]
 
-BANKS = [
-    "Habib Bank", "MCB Bank", "UBL", "Bank Alfalah", "Standard Chartered", "Allied Bank", "Meezan Bank", "Bank of Punjab", "HBL"
-]
-  
+def _normalize_industry(industry):
+    """Map a human-readable industry name to its internal code.
+    Accepts both full names ('Information Technology') and codes ('IT').
+    """
+    # Check if it's already a valid code
+    code = query_value("SELECT code FROM industries WHERE code = ?", (industry,))
+    if code:
+        return code
+    # Try mapping from full name
+    code = query_value("SELECT code FROM industries WHERE name = ?", (industry,))
+    if code:
+        return code
+    raise ValueError(f"Industry '{industry}' not found.")
+
+
 def bank_name():
-    return random.choice(BANKS)
-
-def iban():
-    # Basic mock IBAN: PK + 2-digit checksum + 4-digit bank code + random 16 digits
-    return f"PK{random.randint(10,99)}{random.randint(1000,9999)}{random.randint(10**15,10**16-1)}"
-    
-def company_name():   
-    return random.choice(COMPANIES)
+    """Return a random Pakistani bank name."""
+    return query_value("SELECT name FROM banks ORDER BY RANDOM() LIMIT 1")
 
 
-# Industries
-INDUSTRIES = {
-    "Information Technology": "IT",
-    "Finance": "Finance",
-    "Healthcare": "Healthcare",
-    "Education": "Education",
-    "Marketing & Media": "Marketing",
-    "Government / Public Sector": "Government",
-    "Engineering / Manufacturing": "Engineering",
-    "Hospitality / Retail": "Retail",
-    "Entrepreneur / Startup": "Entrepreneur",
-    "Legal / Consulting": "Consulting"
-}
-# Job titles mapped to industries
+def iban(bank=None):
+    """Generate a realistic Pakistani IBAN.
+    If bank is specified, use that bank's actual IBAN code.
+    """
+    if bank:
+        code = query_value("SELECT iban_code FROM banks WHERE name = ?", (bank,))
+        if not code:
+            raise ValueError(f"Bank '{bank}' not found.")
+    else:
+        code = query_value("SELECT iban_code FROM banks ORDER BY RANDOM() LIMIT 1")
 
-JOB_TITLE_MAPPING = {
-    "IT": [
-        "Software Engineer", "Frontend Developer", "Backend Developer",
-        "Full Stack Developer", "DevOps Engineer", "Data Scientist",
-        "Machine Learning Engineer", "AI Researcher", "Cybersecurity Engineer",
-        "Cloud Solutions Architect", "Mobile App Developer", "Blockchain Developer",
-        "QA / Test Engineer", "UI/UX Designer", "Network Engineer", "Database Administrator",
-        "IT Support Specialist", "Systems Analyst"
-    ],
-    "Finance": [
-        "Accountant", "Auditor", "Financial Analyst", "Investment Analyst",
-        "Tax Consultant", "Risk Manager", "Credit Analyst", "Loan Officer",
-        "Treasury Manager", "Financial Controller"
-    ],
-    "Healthcare": [
-        "Doctor", "Nurse", "Pharmacist", "Lab Technician", "Radiologist",
-        "Medical Researcher", "Physiotherapist", "Dietitian", "Surgeon", "Psychologist"
-    ],
-    "Education": [
-        "Teacher", "Lecturer", "Professor", "Research Associate", 
-        "Academic Coordinator", "Curriculum Designer", "Educational Consultant"
-    ],
-    "Marketing": [
-        "Graphic Designer", "Content Writer", "Copywriter", "Video Editor",
-        "Animator", "Photographer", "Digital Marketing Specialist",
-        "Social Media Manager", "Art Director", "Marketing Manager", "Sales Executive"
-    ],
-    "Government": [
-        "Civil Servant", "Policy Analyst", "Administrative Officer",
-        "Diplomat", "Law Enforcement Officer", "Urban Planner"
-    ],
-    "Engineering": [
-        "Civil Engineer", "Mechanical Engineer", "Electrical Engineer",
-        "Chemical Engineer", "Industrial Engineer", "Production Manager",
-        "Quality Assurance Engineer"
-    ],
-    "Retail": [
-        "Hotel Manager", "Chef", "Waiter", "Waitress", "Store Manager",
-        "Sales Associate", "Customer Service Representative"
-    ],
-    "Entrepreneur": [
-        "Entrepreneur", "Startup Founder", "Business Development Manager",
-        "Operations Manager", "Strategy Analyst", "Consultant"
-    ],
-    "Consulting": [
-        "Legal Advisor", "Lawyer", "Advocate", "Compliance Officer", "Consultant"
-    ]   
-}
+    checksum = str(random.randint(10, 99))
+    account = str(random.randint(10**15, 10**16 - 1))
+    return f"PK{checksum}{code}{account}"
 
-# Functions
 
-def job_title(industry=None):
+def company_name(industry=None):
+    """Return a random company name. Optionally filter by industry."""
     if industry:
-        # Map human-readable input to internal keys (e.g. "Information Technology" -> "IT")
-        normalized = INDUSTRIES.get(industry, industry)
-        if normalized not in JOB_TITLE_MAPPING:
-            raise ValueError(f"Industry '{industry}' not found.")
+        code = _normalize_industry(industry)
+        return query_value(
+            "SELECT name FROM companies WHERE industry_code = ? ORDER BY RANDOM() LIMIT 1",
+            (code,)
+        )
+    return query_value("SELECT name FROM companies ORDER BY RANDOM() LIMIT 1")
 
-        return random.choice(JOB_TITLE_MAPPING[normalized])
-    # Randomly pick an industry first
-    selected_industry = random.choice(list(JOB_TITLE_MAPPING.keys()))
-    return random.choice(JOB_TITLE_MAPPING[selected_industry])
-
-def job_title_with_industry():
-    selected_industry = random.choice(list(JOB_TITLE_MAPPING.keys()))
-    title = random.choice(JOB_TITLE_MAPPING[selected_industry])
-    return f"{title} - {selected_industry}"
 
 def industry_name():
-    return random.choice(list(INDUSTRIES.keys()))
+    """Return a random industry name (human-readable)."""
+    return query_value("SELECT name FROM industries ORDER BY RANDOM() LIMIT 1")
+
+
+def job_title(industry=None):
+    """Return a random job title. Optionally filter by industry."""
+    if industry:
+        code = _normalize_industry(industry)
+        return query_value(
+            "SELECT title FROM job_titles WHERE industry_code = ? ORDER BY RANDOM() LIMIT 1",
+            (code,)
+        )
+    return query_value("SELECT title FROM job_titles ORDER BY RANDOM() LIMIT 1")
+
+
+def job_title_with_industry():
+    """Return a string of 'job_title - industry_code'."""
+    row = query_row("SELECT title, industry_code FROM job_titles ORDER BY RANDOM() LIMIT 1")
+    return f"{row[0]} - {row[1]}"
+
 
 def salary(industry=None):
-    """
-    Generate a random salary in PKR based on industry rough ranges.
-    """
-    # Rough salary ranges (monthly PKR)
-    ranges = {
-        "IT": (50000, 250000),
-        "Finance": (40000, 200000),
-        "Healthcare": (30000, 180000),
-        "Education": (25000, 120000),   
-        "Marketing": (30000, 150000),   
-        "Government": (25000, 120000),
-        "Engineering": (35000, 180000),
-        "Retail": (20000, 100000),
-        "Entrepreneur": (50000, 300000),
-        "Consulting": (40000, 200000)
-    }  
+    """Generate a random salary in PKR based on industry salary ranges, rounded to clean figures."""
     if industry:
-        normalized = INDUSTRIES.get(industry, industry)
-        if normalized in ranges:
-            low, high = ranges[normalized]
-        else:
-            low, high = random.choice(list(ranges.values()))
-    else:
-        low, high = random.choice(list(ranges.values()))
-    return random.randint(low, high)
+        code = _normalize_industry(industry)
+        row = query_row(
+            "SELECT min_salary, max_salary FROM industries WHERE code = ?", (code,)
+        )
+        if row:
+            raw_salary = random.randint(row[0], row[1])
+            return round(raw_salary / 500) * 500
+
+    row = query_row(
+        "SELECT min_salary, max_salary FROM industries ORDER BY RANDOM() LIMIT 1"
+    )
+    raw_salary = random.randint(row[0], row[1])
+    return round(raw_salary / 500) * 500

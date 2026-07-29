@@ -1,13 +1,62 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.logs/
-.Python
-*.txt
-dist/
-*.egg-info
-.eggs/
+*.py[cod]
+*$py.class
+
+# Database locks / journals / temp backups (do NOT ignore faker_pk/faker_pk.db itself)
+*.db-journal
+*.db-wal
+*.db-shm
+*.db.bak
+
+# Distribution / packaging
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
+# Virtual environments
 venv/
-.env
+.venv/
+.venv
+ENV/
+env/
+active_env/
 
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.run/
+
+# Editors and IDEs
 .vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Miscellaneous
+.DS_Store
+*.logs
