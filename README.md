@@ -228,7 +228,7 @@ We welcome contributions from the community! Whether you are expanding datasets,
 ### **Ayesha Anwar**
 - 📧 **Email**: [hayesha1744@gmail.com](mailto:hayesha1744@gmail.com)
 - 🌐 **GitHub**: [Ayesha-Anwar607](https://github.com/Ayesha-Anwar607)
-- 💼 **LinkedIn**: [Ayesha Anwar](www.linkedin.com/in/ayesha-anwar-3b73b8349)
+- 💼 **LinkedIn**: [Ayesha Anwar](https://www.linkedin.com/in/ayesha-anwar)
 
 ---
 
