@@ -9,7 +9,6 @@ description = "Fake data generator for Pakistani names, CNICs, personal info, ad
 readme = "README.md"   
 authors = [
     { name = "Muhammad Khubaib Ahmad", email = "khubaib.ahmad@inference-lab.org" },
-    { name = "Ayesha Anwar", email = "hayesha1744@gmail.com" },
     { name = "INFERENCE Lab", email = "contact@inference-lab.org" }
 ]
 

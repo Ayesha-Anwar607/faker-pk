@@ -1,7 +1,9 @@
 # 🇵🇰 faker-pk
+![PyPI Version](https://img.shields.io/pypi/v/faker-pk)
 ![PyPI downloads](https://img.shields.io/pypi/dm/faker-pk)
 ![Python Version](https://img.shields.io/pypi/pyversions/faker-pk)
 ![License](https://img.shields.io/github/license/Inference-LAB/faker-pk)
+
 
 `faker-pk` is a Python package that generates realistic Pakistani data for testing, software demos, synthetic datasets, and application development.  
 
@@ -14,15 +16,11 @@ It also fully integrates as a **Faker Provider** so you can seamlessly use it in
 ## 👥 Authors
 
 - **Muhammad Khubaib Ahmad** (`khubaib.ahmad@inference-lab.org`) - Original creator of `faker-pk`
-- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Lead developer of `faker-pk` v2.0
 - **INFERENCE Lab** (`contact@inference-lab.org`) - Organization
 
 ## 🔧 Maintainers
-
-- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Project maintainer
+- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Lead developer of `faker-pk` v2.0
 - **INFERENCE Lab** (`contact@inference-lab.org`) - Project organization
-
-
 
 ---
 
@@ -222,7 +220,8 @@ We welcome contributions from the community! Whether you are expanding datasets,
 
 ## 📄 License
 
-Distributed under the **MIT License**. See `License.md` for more information.
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
 
 ---
 
