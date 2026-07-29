@@ -223,12 +223,12 @@ We welcome contributions from the community! Whether you are expanding datasets,
 - 📧 **Email**: [khubaib.ahmad@inference-lab.org](mailto:khubaib.ahmad@inference-lab.org)
 - 🌐 **GitHub**: [Khubaib8281](https://github.com/Khubaib8281)
 - 🐍 **PyPI**: [Khubaib_01](https://pypi.org/project/faker-pk)
-- 💼 **LinkedIn**: [Muhammad Khubaib Ahmad](https://www.linkedin.com/in/muhammad-khubaib-ahmad-)
+- 💼 **LinkedIn**: [Muhammad Khubaib Ahmad](https://www.linkedin.com/in/muhammad-khubaib-ahmad-/)
 
 ### **Ayesha Anwar**
 - 📧 **Email**: [hayesha1744@gmail.com](mailto:hayesha1744@gmail.com)
 - 🌐 **GitHub**: [Ayesha-Anwar607](https://github.com/Ayesha-Anwar607)
-- 💼 **LinkedIn**: [Ayesha Anwar](https://www.linkedin.com/in/ayesha-anwar)
+- 💼 **LinkedIn**: [Ayesha Anwar](https://www.linkedin.com/in/ayesha-anwar-3b73b8349/)
 
 ---
 
