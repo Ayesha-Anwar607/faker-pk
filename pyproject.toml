@@ -27,4 +27,4 @@ classifiers = [
 [tool.setuptools.package-data]
 faker_pk = ["*.db"]
 [project.urls]   
-"Homepage" = "https://github.com/Khubaib8281/faker-pk"   
+"Homepage" = "https://github.com/Inference-LAB/faker-pk"   

@@ -18,7 +18,7 @@ def institution(level=None, city=None, province=None):
 
     if level:
         conditions.append("i.type = ?")
-        params.append(level)
+        params.append(level.lower())
     if city:
         conditions.append("i.city = ?")
         params.append(city)
@@ -39,6 +39,8 @@ def institution(level=None, city=None, province=None):
 
 def student_dob(level="university"):
     """Generate an age-appropriate DOB for a student at the given level."""
+    if level:
+        level = level.lower()
     min_age, max_age = AGE_RANGES.get(level, (18, 25))
     today = date.today()
     start = today.replace(year=today.year - max_age)
@@ -58,6 +60,8 @@ def student_profile(level=None, province=None):
     # Default to random level if not specified
     if not level:
         level = random.choice(["school", "college", "university"])
+    else:
+        level = level.lower()
 
     # Pick a random institution, optionally in the given province
     conditions = ["i.type = ?"]

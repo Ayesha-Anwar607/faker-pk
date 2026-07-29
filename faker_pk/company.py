@@ -72,16 +72,18 @@ def job_title_with_industry():
 
 
 def salary(industry=None):
-    """Generate a random salary in PKR based on industry salary ranges."""
+    """Generate a random salary in PKR based on industry salary ranges, rounded to clean figures."""
     if industry:
         code = _normalize_industry(industry)
         row = query_row(
             "SELECT min_salary, max_salary FROM industries WHERE code = ?", (code,)
         )
         if row:
-            return random.randint(row[0], row[1])
+            raw_salary = random.randint(row[0], row[1])
+            return round(raw_salary / 500) * 500
 
     row = query_row(
         "SELECT min_salary, max_salary FROM industries ORDER BY RANDOM() LIMIT 1"
     )
-    return random.randint(row[0], row[1])
+    raw_salary = random.randint(row[0], row[1])
+    return round(raw_salary / 500) * 500
