@@ -2,7 +2,6 @@
 ![PyPI Version](https://img.shields.io/pypi/v/faker-pk)
 ![PyPI downloads](https://img.shields.io/pypi/dm/faker-pk)
 ![Python Version](https://img.shields.io/pypi/pyversions/faker-pk)
-![License](https://img.shields.io/github/license/Inference-LAB/faker-pk)
 
 
 `faker-pk` is a Python package that generates realistic Pakistani data for testing, software demos, synthetic datasets, and application development.  
