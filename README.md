@@ -11,11 +11,18 @@ It also fully integrates as a **Faker Provider** so you can seamlessly use it in
 
 ---
 
-## 👥 Authors & Maintainers
+## 👥 Authors
 
-- **Muhammad Khubaib Ahmad** - Original author and creator of `faker-pk`
-- **Ayesha Anwar** - Lead developer and maintainer
-- **INFERENCE Lab** - Project organization and ongoing development
+- **Muhammad Khubaib Ahmad** (`khubaib.ahmad@inference-lab.org`) - Original creator of `faker-pk`
+- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Lead developer of `faker-pk` v2.0
+- **INFERENCE Lab** (`contact@inference-lab.org`) - Organization
+
+## 🔧 Maintainers
+
+- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Project maintainer
+- **INFERENCE Lab** (`contact@inference-lab.org`) - Project organization
+
+
 
 ---
 
