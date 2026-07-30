@@ -1,33 +1,38 @@
 # 🇵🇰 faker-pk
-![PyPI downloads](https://img.shields.io/pypi/dm/faker-pk)\
+![PyPI Version](https://img.shields.io/pypi/v/faker-pk)
+![PyPI downloads](https://img.shields.io/pypi/dm/faker-pk)
+![Python Version](https://img.shields.io/pypi/pyversions/faker-pk)
 
-faker-pk is a Python library that generates realistic Pakistani data for testing, demos, datasets, and development.  
-It includes names, CNICs, phone numbers, addresses, bank info, company details, jobs, salaries, and more.  
-It also provides full support as a Faker provider so you can integrate it directly into the Faker ecosystem.
-It’s designed for developers who want **realistic-looking Pakistani data** in their applications or ML datasets.
+
+`faker-pk` is a Python package that generates realistic Pakistani data for testing, software demos, synthetic datasets, and application development.  
+
+It supports generating localized Pakistani names, CNICs, mobile numbers, network providers, complete addresses, bank info, IBANs, company details, industry-aware job titles, clean salary figures, and educational institutions with student profiles.
+
+It also fully integrates as a **Faker Provider** so you can seamlessly use it inside the standard `faker` library ecosystem.
 
 ---
-## Authors
 
-- **Muhammad Khubaib Ahmad** - Original author and creator of faker-pk
-- **INFERENCE Lab** - Organization behind the ongoing development of faker-pk
+## 👥 Authors
 
-## Maintainers
+- **Muhammad Khubaib Ahmad** (`khubaib.ahmad@inference-lab.org`) - Original creator of `faker-pk`
+- **INFERENCE Lab** (`contact@inference-lab.org`) - Organization
 
-- **Ayesha Anwar** - Lead developer of faker-pk v2.0
-- **INFERENCE Lab** - Project organization and maintainer
+## 🔧 Maintainers
+- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Lead developer of `faker-pk` v2.0
+- **INFERENCE Lab** (`contact@inference-lab.org`) - Project organization
 
-## Why Use faker-pk?
+---
 
-Developers working with Pakistani applications often struggle with:
+## 💡 Why Use `faker-pk`?
 
-- Generating realistic user data  
-- Testing CNIC and phone formats  
-- Filling databases with sample business information  
-- Creating synthetic datasets  
-- Running demos without exposing real personal data  
+Developers building Pakistani software applications often encounter issues with:
+- Generating realistic, localized user profiles (CNIC, phone numbers, addresses)
+- Validating Pakistani identity formats (CNIC last-digit gender checks)
+- Populating development databases with real-world company, industry, and banking data
+- Simulating student datasets filtered by city, province, or institution level
+- Running software demonstrations safely without exposing real personal data
 
-faker-pk solves this by providing structured, validated, Pakistan-focused fake data.
+`faker-pk` resolves this by utilizing an optimized, local SQLite database backend for reliable and realistic Pakistani data generation.
 
 ---
 
@@ -37,7 +42,7 @@ faker-pk solves this by providing structured, validated, Pakistan-focused fake d
 pip install faker-pk
 ```
 
-Upgrade:
+To upgrade to the latest version:
 
 ```bash
 pip install --upgrade faker-pk
@@ -45,105 +50,123 @@ pip install --upgrade faker-pk
 
 ---
 
-# Quick Usage (FakerPK Class)
+## 🚀 Quick Start (Standalone `FakerPK` Class)
 
 ```python
 from faker_pk import FakerPK
 
 fake = FakerPK()
 
-print(fake.male_name())
-print(fake.cnic())
-print(fake.phone_number())
-print(fake.full_address())
-print(fake.company_name())
+print("Male Name:", fake.male_name())
+print("CNIC:", fake.cnic(gender="male"))
+print("Phone Number:", fake.phone_number(provider="Jazz"))
+print("Full Address:", fake.full_address(province="Punjab"))
+print("Company:", fake.company_name(industry="IT"))
+print("Salary (PKR):", fake.salary(industry="IT"))
+print("University:", fake.institution(level="university", city="Lahore"))
 ```
 
 ---
 
-# 🧩 All Attributes & Functions
+## 🧩 Complete API Reference
 
-Below is the full API that faker-pk generates.
+### 👤 Personal Information
 
----
-
-## 👤 Personal Information
-
-| Function | Description | Example |
-|---------|-------------|---------|
-| `male_name(count=1)` | Pakistani male names | `"Bilal Khan"` |
-| `female_name(count=1)` | Pakistani female names | `"Ayesha Malik"` |
-| `cnic(count=1)` | Valid CNIC format `xxxxx-xxxxxxx-x` | `"35201-6543210-7"` |
-| `phone_number(count=1)` | Pakistani mobile format | `+923041234567` |
-| `sim_provider(count=1)` | Mobile network providers | `"Jazz"` |
-| `caste(count=1)` | Castes used across Pakistan | `"Ansari"` |
-| `sect(count=1)` | Religious sects | `"Sunni"` |
-| `dob(count=1)` | Random date of birth | `"1998-05-14"` |
+| Function | Description | Options / Filters | Example Output |
+| :--- | :--- | :--- | :--- |
+| `male_name(count=1)` | Realistic Pakistani male names | `count` | `"Kamran Qureshi"` |
+| `female_name(count=1)` | Realistic Pakistani female names | `count` | `"Laraib Javed"` |
+| `cnic(count=1, gender=None)` | Valid formatted CNIC `xxxxx-xxxxxxx-x` | `gender='male'/'female'` | `"35201-6543210-7"` |
+| `phone_number(count=1, provider=None)` | Pakistani mobile number format | `provider='Jazz'/'Zong'/...` | `"+923001234567"` |
+| `sim_provider(count=1)` | Pakistani mobile network operator | `count` | `"Jazz"` |
+| `caste(count=1)` | Pakistani castes & surnames | `count` | `"Zehri"` |
+| `sect(count=1)` | Religious sects | `count` | `"Sunni"` |
+| `dob(count=1)` | Random date of birth | `count` | `"1998-05-14"` |
 
 ---
 
-## 🏠 Address Information
+### 🏠 Address Information
 
-| Function | Description | Example |
-|---------|-------------|---------|
-| `city(count=1)` | Cities in Pakistan | `"Karachi"` |
-| `province(count=1)` | Pakistani provinces | `"Punjab"` |
-| `full_address(count=1)` | Complete Pakistani address | `"House No. 45, Street 10, Lahore, Punjab, 54000"` |
-
----
-
-## 🏢 Company & Business Information
-
-| Function | Description | Example |
-|---------|-------------|---------|
-| `company_name(count=1)` | Random company names | `"TechWorks Pvt Ltd"` |
-| `industry_name(count=1)` | Industries in Pakistan | `"Telecommunications"` |
-| `bank_name(count=1)` | Pakistani banks | `"HBL"` |
-| `iban(count=1)` | Pakistani IBAN format | `"PK36HABB0000001234567890"` |
-| `salary(count=1, industry=industry)` | Salary estimates (industry-aware) | `95000` |
-
-> Valid ```industry``` parameters that are considered:
-- IT   
-- Finance
-- Healthcare
-- Education  
-- Marketing
-- Government
-- Engineering
-- Retail
-- Entrepreneur
-- Consulting
+| Function | Description | Options / Filters | Example Output |
+| :--- | :--- | :--- | :--- |
+| `city(count=1, province=None)` | Pakistani cities | `province='Punjab'/...` | `"Lahore"` |
+| `province(count=1, city=None)` | Pakistani provinces | `city='Karachi'/...` | `"Sindh"` |
+| `full_address(count=1, city=None, province=None)` | Complete street address with postal code | `city`, `province` | `"House No. 454, Street No. 11, Lahore, Punjab, 54000"` |
 
 ---
 
-## 💼 Job Information
+### 🏢 Company & Financial Information
 
-| Function | Description | Example |
-|---------|-------------|---------|
-| `job_title(count=1)` | Random job titles | `"Software Engineer"` |
-| `job_title_with_industry(count=1)` | Job title with industry | `"Finance Analyst – Banking"` |
+| Function | Description | Options / Filters | Example Output |
+| :--- | :--- | :--- | :--- |
+| `company_name(count=1, industry=None)` | Registered Pakistani business names | `industry='IT'/...` | `"Lucky Cement Limited"` |
+| `industry_name(count=1)` | Industry sector names | `count` | `"Information Technology"` |
+| `bank_name(count=1)` | Registered commercial banks in Pakistan | `count` | `"Meezan Bank"` |
+| `iban(count=1, bank=None)` | Valid Pakistani IBAN format | `bank='HBL'/...` | `"PK27UNIL8060952103358359"` |
+| `salary(count=1, industry=None)` | Realistic salary in PKR| `industry='IT'/...` | `115500` |
+
+#### 📊 Supported Industry Codes & Names:
+When filtering `company_name()`, `job_title()`, or `salary()`, you can pass any of the following codes or full names:
+
+- `IT` (Information Technology)
+- `Finance` (Finance & Banking)
+- `Healthcare` (Healthcare & Pharmaceuticals)
+- `Education` (Education & Academics)
+- `Marketing` (Marketing & Media)
+- `Government` (Government & Public Sector)
+- `Engineering` (Engineering & Manufacturing)
+- `Retail` (Hospitality & Retail)
+- `Entrepreneur` (Entrepreneur & Startups)
+- `Consulting` (Legal & Consulting)
+- `Art` (Art & Entertainment)
+- `Politics` (Politics & Public Policy)
+- `Agriculture` (Agriculture & Farming)
+- `Services` (Domestic & Personal Services)
+- `Defense` (Defense & Public Safety)
 
 ---
 
-## 🔁 Generating Multiple Items
+### 💼 Job Information
+
+| Function | Description | Options / Filters | Example Output |
+| :--- | :--- | :--- | :--- |
+| `job_title(count=1, industry=None)` | Industry-specific job titles | `industry='IT'/...` | `"Software Engineer"` |
+| `job_title_with_industry(count=1)` | Combined job title and industry code | `count` | `"Data Scientist - IT"` |
+
+---
+
+### 🎓 Education & Student Profiles
+
+| Function | Description | Options / Filters | Example Output |
+| :--- | :--- | :--- | :--- |
+| `institution(count=1, level=None, city=None, province=None)` | Pakistani school, college, or university | `level='school'/'college'/'university'`, `city`, `province` | `"LUMS"` |
+| `student_dob(count=1, level='university')` | Age-appropriate student DOB | `level='school'/'college'/'university'` | `2002-05-24` |
+| `student_profile(count=1, level=None, province=None)` | Complete, coherent student dict profile | `level`, `province` | `{'name': 'Shahzaib Mirwani', 'gender': 'male', 'cnic': '36836-2572000-5', 'institution': 'University of Karachi', 'level': 'university', 'city': 'Karachi', 'province': 'Sindh', 'dob': 2002-05-24}` |
+
+---
+
+## 🔁 Generating Multiple Records
+
+Passing `count > 1` returns a list of items:
 
 ```python
-fake = FakerPK()
-    
-fake.city(3)
-# ['Lahore', 'Islamabad', 'Multan']
+from faker_pk import FakerPK
 
-fake.male_name(5)
-# ['Ali Khan', 'Usman Raza', 'Zain Qureshi', 'Ahmed Farooq', 'Sami Shah']
+fake = FakerPK()
+
+# Generate 3 cities in Sindh
+print(fake.city(count=3, province="Sindh"))
+# Output: ['Karachi', 'Hyderabad', 'Sukkur']
+
+# Generate 5 realistic student profiles
+profiles = fake.student_profile(count=5, level="university")
 ```
 
 ---
 
-# 🔌 Faker Provider Integration
-   
-faker-pk fully integrates with the Faker library via `FakerPKProvider`.
+## 🔌 Standard `faker` Integration (`FakerPKProvider`)
 
-### ➤ Add Provider to Faker
+You can register `FakerPKProvider` with Python's standard `faker` library. All methods are available prefixed with `pk_` (or as alias methods):
 
 ```python
 from faker import Faker
@@ -153,121 +176,70 @@ fake = Faker()
 fake.add_provider(FakerPKProvider)
 
 print(fake.pk_male_name())
-print(fake.pk_cnic())
-print(fake.pk_full_address())
-```
-
-### ➤ Provider Methods
-
-| Provider Function | Description |
-|------------------|-------------|
-| `pk_male_name()` | Male name |
-| `pk_female_name()` | Female name |
-| `pk_cnic()` | CNIC |
-| `pk_phone_number()` | Pakistani mobile number |
-| `pk_sim_provider()` | Mobile network |
-| `pk_caste()` | Caste |
-| `pk_sect()` | Sect |
-| `pk_dob()` | DOB |
-| `pk_city()` | City |
-| `pk_province()` | Province |
-| `pk_full_address()` | Complete address |
-| `pk_company_name()` | Company |
-| `pk_industry_name()` | Industry |
-| `pk_job_title()` | Industry-aware job title |
-| `pk_job_title_with_industry()` | Combined title |
-| `pk_salary(industry=industry)` | Salary range |
-| `pk_bank_name()` | Bank |
-| `pk_iban()` | IBAN |
-
----
-
-## 🧩 API Reference
-
-| Function | Description | Example Output |
-|-----------|--------------|----------------|
-| `male_name(count=1)` | Generates one or more male names | `['Ali Khan']` |
-| `female_name(count=1)` | Generates one or more female names | `['Ayesha Malik']` |
-| `cnic(count=1)` | Generates valid CNIC numbers | `['37405-1234567-8']` |
-| `phone_number(count=1)` | Generates Pakistani phone numbers | `['+923001234567']` |
-| `city(count=1)` | Returns cities from Pakistan | `['Karachi']` |
-| `province(count=1)` | Returns Pakistani provinces | `['Sindh']` |
-| `full_address(count=1)` | Returns complete fake addresses | `['House No. 23, Street No. 8, Lahore, Punjab, 54000']` |
-| `company_name(count=1)` | Returns random company names | `['TechNova Pvt Ltd']` |
-
----
-### Example Script
-```python
-from faker_pk import FakerPK
-
-fake = FakerPK()
-
-for _ in range(3):
-    print({
-        "Name": fake.male_name(),
-        "CNIC": fake.cnic(),
-        "Phone": fake.phone_number(),
-        "Address": fake.full_address(),
-        "Company": fake.company_name(),  
-        "Salary": fake.salary(industry="Information Technology")
-    })
-```
-
-**Output:**   
-```
-{'Name': 'Ali Raza', 'CNIC': '35201-6543210-7', 'Phone': '+923125678901', 'Address': 'House No. 12, Street No. 3, Islamabad, Islamabad, 44000', 'Company': 'Techworks'}
-```
-
----   
-
-## 🛠️ Development
-  
-Clone the repository and install locally:
-
-```bash
-git clone https://github.com/Khubaib8281/faker-pk.git
-cd faker-pk
-pip install -e .
+print(fake.pk_cnic(gender="male"))
+print(fake.pk_full_address(province="Punjab"))
+print(fake.pk_institution(level="university"))
+print(fake.pk_student_profile())
 ```
 
 ---
 
-# 🤝 Contributing
+## 🛠️ Local Development & Testing
 
-You can contribute by:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Inference-LAB/faker-pk.git
+   cd faker-pk
+   ```
 
-- Adding realistic datasets ( universities, etc.)
-- Improving job industries and salaries
-- Expanding address and bank coverage
-- Adding validation utilities
+2. **Install in editable mode**:
+   ```bash
+   pip install -e .
+   ```
 
-Pull requests are welcome.
-
----
-
-# 📄 License
-
-MIT License.
-
----
-
-# 👤 Author
-
-**Muhammad Khubaib Ahmad**  
-
-📧 [khubaib.ahmad@inference-lab.org](mailto:khubaib.ahmad@inference-lab.org)  
-
-🌐 [GitHub: Khubaib8281](https://github.com/Khubaib8281)
-
-🐍 [PYPI: Khubaib_01](https://pypi.org/project/faker-pk)
-
-> **LinkedIn:** https://www.linkedin.com/in/muhammad-khubaib-ahmad-
+3. **Run the test suite**:
+   ```bash
+   pytest
+   ```
 
 ---
 
-# ⭐ Support
+## 🤝 Contributing
 
-If this project helps you, give it a star on GitHub!
+We welcome contributions from the community! Whether you are expanding datasets, adding validation rules, or improving performance, here is how you can help:
 
-> https://github.com/Khubaib8281/faker-pk
-    
+#### How to Contribute:
+1. **Fork & Clone**: Fork `Inference-LAB/faker-pk` on GitHub and clone your fork locally.
+2. **Feature Branches**: Create a dedicated feature branch for your changes (`git checkout -b feat/add-new-dataset`).
+3. **Database Updates**: If adding new dataset records, update `faker_pk/initialize_db.py` so the SQLite database re-seeds cleanly.
+4. **Write Unit Tests**: Add tests under `tests/` for any new functions or parameters. Ensure `pytest` passes with 100% success.
+5. **Submit a Pull Request**: Push your branch and open a PR against `main` with a clear summary of your changes.
+
+---
+
+## 👤 Authors & Contact Info
+
+### **Muhammad Khubaib Ahmad**
+- 📧 **Email**: [khubaib.ahmad@inference-lab.org](mailto:khubaib.ahmad@inference-lab.org)
+- 🌐 **GitHub**: [Khubaib8281](https://github.com/Khubaib8281)
+- 🐍 **PyPI**: [Khubaib_01](https://pypi.org/project/faker-pk)
+- 💼 **LinkedIn**: [Muhammad Khubaib Ahmad](https://www.linkedin.com/in/muhammad-khubaib-ahmad-/)
+
+### **Ayesha Anwar**
+- 📧 **Email**: [hayesha1744@gmail.com](mailto:hayesha1744@gmail.com)
+- 🌐 **GitHub**: [Ayesha-Anwar607](https://github.com/Ayesha-Anwar607)
+- 💼 **LinkedIn**: [Ayesha Anwar](https://www.linkedin.com/in/ayesha-anwar-3b73b8349/)
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+## ⭐ Support
+
+If `faker-pk` was helpful for your project or application, please consider giving the repository a star on GitHub!  
+👉 [https://github.com/Inference-LAB/faker-pk](https://github.com/Inference-LAB/faker-pk)
+
