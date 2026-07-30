@@ -1,4 +1,4 @@
-# 🇵🇰 faker-pk
+# faker-pk
 ![PyPI Version](https://img.shields.io/pypi/v/faker-pk)
 ![PyPI downloads](https://img.shields.io/pypi/dm/faker-pk)
 ![Python Version](https://img.shields.io/pypi/pyversions/faker-pk)
