@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
      
 [project]        
 name = "faker-pk"
-version = "0.1.9"                
+version = "0.2.0"                
 description = "Fake data generator for Pakistani names, CNICs, personal info, address info, job titles, IBAN, Bank names, cities, provinces, castes, sect, network providers, job aware salaries and companies info."   
 readme = "README.md"   
 authors = [
