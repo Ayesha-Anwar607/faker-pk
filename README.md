@@ -18,7 +18,7 @@ It also fully integrates as a **Faker Provider** so you can seamlessly use it in
 - **INFERENCE Lab** (`contact@inference-lab.org`) - Organization
 
 ## Maintainers
-- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Lead developer of `faker-pk` v2.0
+- **Ayesha Anwar** (`hayesha1744@gmail.com`) - Lead developer of `faker-pk` v0.2.0
 - **INFERENCE Lab** (`contact@inference-lab.org`) - Project organization
 
 ---
